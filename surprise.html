@@ -14,8 +14,9 @@ html, body{
     background: linear-gradient(-45deg, #ff4e8a, #ff7eb3, #ff3d68, #ff99ac);
     background-size:400% 400%;
     animation:gradientBG 12s ease infinite;
-    overflow-y:auto; /* Make body scrollable */
+    overflow-y:auto; /* make body scrollable */
     scroll-behavior:smooth;
+    padding:20px;
 }
 
 @keyframes gradientBG{
@@ -24,27 +25,62 @@ html, body{
     100%{background-position:0% 50%;}
 }
 
-body{
-    padding:20px;
-}
-
+/* Glass-style card */
 .card{
     max-width:600px;
     width:90%;
     margin:50px auto;
     padding:30px 25px;
     border-radius:20px;
-    background:white;
+    background: rgba(0,0,0,0.35); /* glass */
+    backdrop-filter: blur(10px);
+    box-shadow:0 0 35px rgba(255,255,255,0.2);
     text-align:center;
     position:relative;
     z-index:2;
-    box-shadow:0 20px 60px rgba(0,0,0,0.2);
-    animation:fadeIn 1.5s ease;
+    animation:fadeIn 1.5s ease, floatCard 4s ease-in-out infinite alternate;
 }
 
 @keyframes fadeIn{
     from{opacity:0; transform:translateY(30px);}
     to{opacity:1; transform:translateY(0);}
+}
+
+/* Subtle floating animation for card */
+@keyframes floatCard{
+    0%{transform:translateY(0);}
+    100%{transform:translateY(10px);}
+}
+
+/* Glow behind card */
+.glow{
+    position:absolute;
+    width:180px;
+    height:180px;
+    background: rgba(255,61,104,0.25); /* soft pink/red */
+    border-radius:50%;
+    filter:blur(80px);
+    top:-40px;
+    right:-40px;
+    animation:float 6s infinite alternate ease-in-out;
+    z-index:1;
+}
+.glow::after{
+    content:'';
+    position:absolute;
+    width:100px;
+    height:100px;
+    background: rgba(255,153,172,0.2);
+    border-radius:50%;
+    top:40px;
+    left:-50px;
+    filter:blur(50px);
+    z-index:-1;
+}
+
+@keyframes float{
+    from{transform:translateY(0);}
+    to{transform:translateY(20px);}
 }
 
 h2{color:#ff3d68;margin-bottom:15px;}
@@ -57,7 +93,7 @@ h2{color:#ff3d68;margin-bottom:15px;}
     margin-bottom:12px;
     text-align:left;
     line-height:1.7;
-    color:#444;
+    color:#fff;
     font-size:16px;
 }
 
@@ -98,24 +134,6 @@ h2{color:#ff3d68;margin-bottom:15px;}
     to{transform:translateY(110vh) rotate(360deg);}
 }
 
-/* Glow circle behind card */
-.glow{
-    position:absolute;
-    width:150px;
-    height:150px;
-    background:rgba(255,61,104,0.2);
-    border-radius:50%;
-    filter:blur(60px);
-    top:-50px;
-    right:-50px;
-    animation:float 6s infinite alternate ease-in-out;
-}
-
-@keyframes float{
-    from{transform:translateY(0);}
-    to{transform:translateY(20px);}
-}
-
 /* Mobile adjustments */
 @media(max-width:600px){
     .card{padding:25px 20px; margin-top:30px;}
@@ -143,7 +161,7 @@ h2{color:#ff3d68;margin-bottom:15px;}
 </div>
 
 <script>
-const herName="Mera Bachaa";
+const herName="Ayesha";
 document.querySelector(".name").textContent=herName;
 
 /* Animate paragraphs sequentially */
