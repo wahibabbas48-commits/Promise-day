@@ -16,8 +16,9 @@ body{
     animation:gradientBG 12s ease infinite;
     display:flex;
     justify-content:center;
-    align-items:center;
-    overflow:hidden;
+    align-items:flex-start;
+    overflow-x:hidden;
+    scroll-behavior:smooth;
 }
 
 @keyframes gradientBG{
@@ -27,20 +28,43 @@ body{
 }
 
 .card{
-    background:white;
-    max-width:500px;
-    width:100%;
-    padding:30px;
+    max-width:600px;
+    width:90%;
+    margin-top:50px;
+    padding:30px 25px;
     border-radius:20px;
+    background:white;
     text-align:center;
     position:relative;
     z-index:2;
+    box-shadow:0 20px 60px rgba(0,0,0,0.2);
+    animation:fadeIn 1.5s ease;
+}
+
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(30px);}
+    to{opacity:1; transform:translateY(0);}
 }
 
 h2{color:#ff3d68;margin-bottom:15px;}
 
-.message{line-height:1.7;color:#444;}
+/* Love-letter paragraphs */
+.message p{
+    opacity:0;
+    transform:translateY(20px);
+    animation:fadeUp 1s forwards;
+    margin-bottom:12px;
+    text-align:left;
+    line-height:1.7;
+    color:#444;
+    font-size:16px;
+}
 
+@keyframes fadeUp{
+    to{opacity:1; transform:translateY(0);}
+}
+
+/* Final reveal */
 .final{
     margin-top:25px;
     opacity:0;
@@ -48,6 +72,8 @@ h2{color:#ff3d68;margin-bottom:15px;}
     transition:1s ease;
     font-weight:600;
     color:#ff3d68;
+    text-align:center;
+    font-size:17px;
 }
 
 .final.show{
@@ -68,16 +94,40 @@ h2{color:#ff3d68;margin-bottom:15px;}
 }
 
 @keyframes fall{
-    to{
-        transform:translateY(110vh) rotate(360deg);
-    }
+    to{transform:translateY(110vh) rotate(360deg);}
+}
+
+/* Glow circle behind card */
+.glow{
+    position:absolute;
+    width:150px;
+    height:150px;
+    background:rgba(255,61,104,0.2);
+    border-radius:50%;
+    filter:blur(60px);
+    top:-50px;
+    right:-50px;
+    animation:float 6s infinite alternate ease-in-out;
+}
+
+@keyframes float{
+    from{transform:translateY(0);}
+    to{transform:translateY(20px);}
+}
+
+/* Mobile adjustments */
+@media(max-width:600px){
+    .card{padding:25px 20px; margin-top:30px;}
+    .message p{font-size:15px;}
+    .final{font-size:16px;}
 }
 </style>
 </head>
 <body>
 
 <div class="card">
-    <h2>Get Well Soon, <span class="name"></span> 💕</h2>
+    <div class="glow"></div>
+    <h2>Get Well Soon, <span class="name"></span> 🤍</h2>
     <div class="message">
        I know you're not feeling your best right now,  
     and it breaks my heart to see you under the weather.<br><br> 
@@ -89,7 +139,7 @@ h2{color:#ff3d68;margin-bottom:15px;}
     I’m here for you — cheering quietly, holding space for you, and wishing you comfort every single day.<br><br> 
 
     Lean on me if you need a little extra warmth, a laugh, or just someone to sit beside you.  
-    You’re not alone, and you’re deeply cared for — more than words can ever say.<br> <br> 
+    You’re not alone, and you’re deeply cared for — more than words can ever say.<br>
     </div>
 
     <div class="final" id="finalMessage">
@@ -101,10 +151,19 @@ h2{color:#ff3d68;margin-bottom:15px;}
 const herName="Mera Bachaa";
 document.querySelector(".name").textContent=herName;
 
-/* Reveal final message */
-setTimeout(()=>{
+/* Reveal final message after all paragraphs fade in */
+function revealFinalMessage(){
     document.getElementById("finalMessage").classList.add("show");
-},4000);
+}
+
+/* Animate paragraphs sequentially */
+const paragraphs = document.querySelectorAll('.message p');
+paragraphs.forEach((p,i)=>{
+    p.style.animationDelay = (i*1.2)+"s";
+});
+
+const totalDelay = paragraphs.length * 1.2 * 1000 + 500; // wait for last paragraph
+setTimeout(revealFinalMessage, totalDelay);
 
 /* Falling petals generator */
 function createPetal(){
@@ -113,10 +172,8 @@ function createPetal(){
     petal.style.left=Math.random()*100+"vw";
     petal.style.animationDuration=(5+Math.random()*5)+"s";
     document.body.appendChild(petal);
-
     setTimeout(()=>petal.remove(),10000);
 }
-
 setInterval(createPetal,400);
 </script>
 
