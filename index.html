@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Promise Day Baby</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+body{
+    min-height:100vh;
+    background: linear-gradient(-45deg, #ff4e8a, #ff7eb3, #ff3d68, #ff99ac);
+    background-size:400% 400%;
+    animation:gradientBG 12s ease infinite;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:20px;
+    color:white;
+}
+
+@keyframes gradientBG{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+.container{
+    width:100%;
+    max-width:500px;
+    backdrop-filter:blur(10px);
+    background:rgba(0,0,0,0.3);
+    padding:30px 20px;
+    border-radius:20px;
+}
+
+h1{font-size:clamp(28px,5vw,40px);margin-bottom:15px;}
+
+.name{
+    font-weight:700;
+    text-shadow:0 0 15px rgba(255,255,255,0.8);
+}
+
+p{margin-bottom:25px;font-size:16px;}
+
+button{
+    padding:12px 25px;
+    border:none;
+    border-radius:30px;
+    background:white;
+    color:#ff3d68;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:active{transform:scale(0.95);}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Happy Promise Day 💖</h1>
+    <p>For <span class="name"></span> — today and always.</p>
+    <button onclick="location.href='promises.html'">Open My Promises</button>
+</div>
+
+<script>
+const herName="Mania";
+document.querySelector(".name").textContent=herName;
+</script>
+
+</body>
+</html>

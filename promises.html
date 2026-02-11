@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Promises</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+body{
+    min-height:100vh;
+    padding:30px 15px;
+    background: linear-gradient(-45deg, #ff4e8a, #ff7eb3, #ff3d68, #ff99ac);
+    background-size:400% 400%;
+    animation:gradientBG 12s ease infinite;
+    text-align:center;
+    color:white;
+}
+
+@keyframes gradientBG{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+h1{margin-bottom:30px;font-size:clamp(24px,5vw,36px);}
+
+.cards{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+    justify-content:center;
+    max-width:900px;
+    margin:auto;
+}
+
+.card{
+    width:250px;
+    height:160px;
+    background:rgba(0,0,0,0.35);
+    backdrop-filter:blur(10px);
+    border-radius:20px;
+    padding:20px;
+    cursor:pointer;
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 0 25px rgba(255,255,255,0.2);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    perspective: 1000px;
+}
+
+.card:hover{
+    transform: rotateX(8deg) rotateY(8deg) translateY(-10px);
+}
+
+/* Inner glow when active */
+.card.active{
+    box-shadow:0 0 35px rgba(255,255,255,0.6), inset 0 0 20px rgba(255,255,255,0.3);
+}
+
+.card h3{
+    font-size:18px;
+    margin-bottom:5px;
+    transition: opacity 0.5s ease;
+}
+
+.card p{
+    position:absolute;
+    inset:0;
+    padding:20px;
+    opacity:0;
+    transition:opacity 0.8s ease;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:14px;
+    line-height:1.4;
+    text-align:center;
+}
+
+/* Fade-in text when active */
+.card.active p{
+    opacity:1;
+}
+
+.card.active h3{
+    opacity:0.3;
+}
+
+.card.active .icon{
+    transform:scale(1.3);
+}
+
+/* Mobile adjustment */
+@media(max-width:600px){
+    .card{
+        width:90%;
+        max-width:300px;
+    }
+}
+
+button{
+    margin-top:30px;
+    padding:12px 25px;
+    border:none;
+    border-radius:30px;
+    background:white;
+    color:#ff3d68;
+    font-weight:600;
+}
+
+button:active{transform:scale(0.95);}
+
+.name{font-weight:700;}
+</style>
+</head>
+<body>
+
+<h1>My Promises To You <span class="name"></span> ✨</h1>
+
+<div class="cards">
+    <div class="card" onclick="toggleCard(this)">
+        <h3>Promise #1</h3>
+        <p>I promise to stand beside you in every phase of life — especially when you need strength.</p>
+    </div>
+
+    <div class="card" onclick="toggleCard(this)">
+        <h3>Promise #2</h3>
+        <p>I promise to care for your heart gently and respect everything that makes you who you are.</p>
+    </div>
+
+    <div class="card" onclick="toggleCard(this)">
+        <h3>Promise #3</h3>
+        <p>I promise to stay consistent — not just today, but always.</p>
+    </div>
+</div>
+
+<button onclick="location.href='surprise.html'">Surprise for you 💝</button>
+
+<script>
+const herName="Baby";
+document.querySelector(".name").textContent=herName;
+function toggleCard(card){
+    card.classList.toggle('active');
+}
+</script>
+
+</body>
+</html>

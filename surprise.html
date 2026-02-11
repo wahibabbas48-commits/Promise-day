@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Surprise</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+body{
+    min-height:100vh;
+    padding:20px;
+    background: linear-gradient(-45deg, #ff4e8a, #ff7eb3, #ff3d68, #ff99ac);
+    background-size:400% 400%;
+    animation:gradientBG 12s ease infinite;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+}
+
+@keyframes gradientBG{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+.card{
+    background:white;
+    max-width:500px;
+    width:100%;
+    padding:30px;
+    border-radius:20px;
+    text-align:center;
+    position:relative;
+    z-index:2;
+}
+
+h2{color:#ff3d68;margin-bottom:15px;}
+
+.message{line-height:1.7;color:#444;}
+
+.final{
+    margin-top:25px;
+    opacity:0;
+    transform:translateY(20px);
+    transition:1s ease;
+    font-weight:600;
+    color:#ff3d68;
+}
+
+.final.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* Falling Petals */
+.petal{
+    position:fixed;
+    top:-10px;
+    width:15px;
+    height:15px;
+    background:pink;
+    border-radius:50% 50% 50% 0;
+    opacity:0.7;
+    animation:fall linear infinite;
+}
+
+@keyframes fall{
+    to{
+        transform:translateY(110vh) rotate(360deg);
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Get Well Soon, <span class="name"></span> 💕</h2>
+    <div class="message">
+       I know you're not feeling your best right now,  
+    and it breaks my heart to see you under the weather.<br><br> 
+
+    Please remember to take your time to rest and let your body heal.  
+    Every day, even the small moments, are steps toward feeling stronger again.<br><br> 
+
+    You are so brave and resilient, and your smile brightens the world more than you realize.  
+    I’m here for you — cheering quietly, holding space for you, and wishing you comfort every single day.<br><br> 
+
+    Lean on me if you need a little extra warmth, a laugh, or just someone to sit beside you.  
+    You’re not alone, and you’re deeply cared for — more than words can ever say.<br> <br> 
+    </div>
+
+    <div class="final" id="finalMessage">
+            I’ll always be here for you — through sickness, through storms, through everything.💖
+    </div>
+</div>
+
+<script>
+const herName="Mera Bachaa";
+document.querySelector(".name").textContent=herName;
+
+/* Reveal final message */
+setTimeout(()=>{
+    document.getElementById("finalMessage").classList.add("show");
+},4000);
+
+/* Falling petals generator */
+function createPetal(){
+    const petal=document.createElement("div");
+    petal.classList.add("petal");
+    petal.style.left=Math.random()*100+"vw";
+    petal.style.animationDuration=(5+Math.random()*5)+"s";
+    document.body.appendChild(petal);
+
+    setTimeout(()=>petal.remove(),10000);
+}
+
+setInterval(createPetal,400);
+</script>
+
+</body>
+</html>
