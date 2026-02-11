@@ -8,16 +8,13 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
 
-body{
-    min-height:100vh;
-    padding:20px;
+html, body{
+    min-height:100%;
+    width:100%;
     background: linear-gradient(-45deg, #ff4e8a, #ff7eb3, #ff3d68, #ff99ac);
     background-size:400% 400%;
     animation:gradientBG 12s ease infinite;
-    display:flex;
-    justify-content:center;
-    align-items:flex-start;
-    overflow-x:hidden;
+    overflow-y:auto; /* Make body scrollable */
     scroll-behavior:smooth;
 }
 
@@ -27,10 +24,14 @@ body{
     100%{background-position:0% 50%;}
 }
 
+body{
+    padding:20px;
+}
+
 .card{
     max-width:600px;
     width:90%;
-    margin-top:50px;
+    margin:50px auto;
     padding:30px 25px;
     border-radius:20px;
     background:white;
@@ -129,21 +130,15 @@ h2{color:#ff3d68;margin-bottom:15px;}
     <div class="glow"></div>
     <h2>Get Well Soon, <span class="name"></span> 🤍</h2>
     <div class="message">
-       I know you're not feeling your best right now,  
-    and it breaks my heart to see you under the weather.<br><br> 
-
-    Please remember to take your time to rest and let your body heal.  
-    Every day, even the small moments, are steps toward feeling stronger again.<br><br> 
-
-    You are so brave and resilient, and your smile brightens the world more than you realize.  
-    I’m here for you — cheering quietly, holding space for you, and wishing you comfort every single day.<br><br> 
-
-    Lean on me if you need a little extra warmth, a laugh, or just someone to sit beside you.  
-    You’re not alone, and you’re deeply cared for — more than words can ever say.<br>
+        <p>My love, I know you’re not feeling well right now, and it makes me ache to see you like this.</p>
+        <p>I wish I could take away every ache, every cough, and every tired moment, just to see your beautiful smile light up again.</p>
+        <p>Please rest and let your body heal — there’s no rush. Even in this quiet pause, remember that you are stronger than you think, and every little step you take toward feeling better is something to celebrate.</p>
+        <p>I’m here for you, always — to hold your hand, to make you laugh when you need it most, or simply to sit in silence with you, sharing warmth and care.</p>
+        <p>You are cherished more than words can capture, and your light touches me every single day. Heal gently, my love, and know that I am right here, loving you through it all.</p>
     </div>
 
     <div class="final" id="finalMessage">
-            I’ll always be here for you — through sickness, through storms, through everything.💖
+        I’ll always be here for you — through sickness, through storms, through everything. 💖
     </div>
 </div>
 
@@ -151,19 +146,17 @@ h2{color:#ff3d68;margin-bottom:15px;}
 const herName="Mera Bachaa";
 document.querySelector(".name").textContent=herName;
 
-/* Reveal final message after all paragraphs fade in */
-function revealFinalMessage(){
-    document.getElementById("finalMessage").classList.add("show");
-}
-
 /* Animate paragraphs sequentially */
 const paragraphs = document.querySelectorAll('.message p');
 paragraphs.forEach((p,i)=>{
     p.style.animationDelay = (i*1.2)+"s";
 });
 
-const totalDelay = paragraphs.length * 1.2 * 1000 + 500; // wait for last paragraph
-setTimeout(revealFinalMessage, totalDelay);
+/* Reveal final message after last paragraph */
+const totalDelay = paragraphs.length * 1.2 * 1000 + 500;
+setTimeout(()=>{
+    document.getElementById("finalMessage").classList.add("show");
+}, totalDelay);
 
 /* Falling petals generator */
 function createPetal(){
